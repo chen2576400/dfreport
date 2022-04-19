@@ -24,7 +24,7 @@ public class TestMybatisPlusApplicationTests {
     public void testSelect() {
         System.out.println(("----- selectAll method test ------"));
         List<Dfcvtrial> userList = dfcvtrialMapper.selectList(null);
-        System.out.println(userList);
+
 
 
         LambdaQueryWrapper<Dfcvtrial> lqw = Wrappers.lambdaQuery();
