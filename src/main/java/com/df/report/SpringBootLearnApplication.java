@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication
+//@MapperScan(basePackages = "com.df.report.*.dao")
 public class SpringBootLearnApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringBootLearnApplication.class, args);

@@ -1,12 +1,14 @@
 package com.df.report.model;
 
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@Data
 public class Dfcvtrial implements Serializable {
 
     private String classname;
-
 
     private Long id;
 
