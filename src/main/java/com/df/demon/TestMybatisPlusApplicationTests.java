@@ -6,11 +6,15 @@ import com.df.demon.dao.AnchenDemonMapper;
 import com.df.demon.dao.DfcvtrialMapper;
 import com.df.demon.model.Dfcvtrial;
 import com.df.demon.service.DfcvtrialService;
+import com.df.util.DateUtils;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,6 +54,29 @@ public class TestMybatisPlusApplicationTests {
 
 //        List<AnchenDemon>  anchenDemons=anchenDemonMapper.selectList(null);
 //        System.out.println(anchenDemons);
+
+    }
+
+
+    @Test
+    public  void  test1(){
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+        String end = df.format(new Date());
+        //过去一月
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        c.add(Calendar.MONTH, -3);
+//        c.add(Calendar.DAY_OF_MONTH, -7);
+        Date m = c.getTime();
+        String start = df.format(m);
+        String[] time = {start,end};
+
+
+        Date startTime = DateUtils.getStartTime(System.currentTimeMillis());
+        Date endTime = DateUtils.getEndTime(System.currentTimeMillis());
+        String format = DateUtils.format(endTime, "yyyy-MM-dd HH:mm:ss");
+        System.out.println(end);
 
     }
 
