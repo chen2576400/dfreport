@@ -1,0 +1,18 @@
+package com.df.demon.service;
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.df.demon.model.Dfcvtrial;
+import com.df.demon.dao.DfcvtrialMapper;
+import org.springframework.stereotype.Service;
+
+/**
+ * @description:
+ * @author: Mr.Nchen
+ * @create: 2022-04-19 16:39
+ **/
+@Service
+public class DfcvtrialServiceImpl extends ServiceImpl<DfcvtrialMapper, Dfcvtrial> implements DfcvtrialService{
+
+
+
+}

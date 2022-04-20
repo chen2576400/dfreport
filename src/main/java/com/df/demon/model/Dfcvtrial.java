@@ -1,4 +1,4 @@
-package com.df.report.model;
+package com.df.demon.model;
 
 import lombok.Data;
 
@@ -112,7 +112,6 @@ public class Dfcvtrial implements Serializable {
     private String trialNature;
 
     private String trialType;
-
 
     private String name;
 

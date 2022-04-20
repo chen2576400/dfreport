@@ -1,13 +1,14 @@
-package com.df.report.dao;
+package com.df.demon.dao;
 
 
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.df.report.model.Dfcvtrial;
+import com.df.demon.model.Dfcvtrial;
+import com.df.demon.constant.DBType;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-//@DS("db02")
+@DS(DBType.MYSQL)
 public interface DfcvtrialMapper extends BaseMapper<Dfcvtrial> {
 
 }

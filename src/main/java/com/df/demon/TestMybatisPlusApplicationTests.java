@@ -1,11 +1,11 @@
-package com.df.report;
+package com.df.demon;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.df.report.dao.DfcvtrialMapper;
-import com.df.report.model.Dfcvtrial;
-import com.df.report.service.DfcvtrialService;
+import com.df.demon.dao.AnchenDemonMapper;
+import com.df.demon.dao.DfcvtrialMapper;
+import com.df.demon.model.Dfcvtrial;
+import com.df.demon.service.DfcvtrialService;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +27,9 @@ public class TestMybatisPlusApplicationTests {
     @Autowired
     private DfcvtrialService dfcvtrialService;
 
+    @Autowired
+    private AnchenDemonMapper anchenDemonMapper;
+
     @Test
     public void testSelect() {
         System.out.println(("----- selectAll method test ------"));
@@ -44,6 +47,9 @@ public class TestMybatisPlusApplicationTests {
         Dfcvtrial one = dfcvtrialService.getOne(lqw);
         Dfcvtrial byId = dfcvtrialService.getById(698706);
         log.info("=============");
+
+//        List<AnchenDemon>  anchenDemons=anchenDemonMapper.selectList(null);
+//        System.out.println(anchenDemons);
 
     }
 

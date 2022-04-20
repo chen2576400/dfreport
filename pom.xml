@@ -64,6 +64,15 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mybatis-connector.version}</version>
         </dependency>
+
+
+        <!--orcale数据库依赖-->
+        <dependency>
+            <groupId>com.oracle.ojdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
         <!--mybatis-plus-->
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -136,6 +145,12 @@
                         <groupId>mysql</groupId>
                         <artifactId>mysql-connector-java</artifactId>
                         <version>${mybatis-connector.version}</version>
+                    </dependency>
+
+                    <dependency>
+                        <groupId>com.oracle</groupId>
+                        <artifactId>ojdbc14</artifactId>
+                        <version>10.2.0.1.0</version>
                     </dependency>
                 </dependencies>
             </plugin>

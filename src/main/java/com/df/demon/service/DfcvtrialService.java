@@ -1,7 +1,7 @@
-package com.df.report.service;
+package com.df.demon.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.df.report.model.Dfcvtrial;
+import com.df.demon.model.Dfcvtrial;
 
 /**
  * @description:
