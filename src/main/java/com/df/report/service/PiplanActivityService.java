@@ -2,6 +2,10 @@ package com.df.report.service;
 
 import com.df.report.model.PiplanActivity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.df.report.model.PiplanActivityVo;
+
+import java.text.ParseException;
+import java.util.List;
 
 /**
 * @author chenning
@@ -10,4 +14,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface PiplanActivityService extends IService<PiplanActivity> {
 
-}
+    public List<PiplanActivityVo> WorkDelayTable(String[] time, String[] group, String projectId, String planId) ;
+
+    }

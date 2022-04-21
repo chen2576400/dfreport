@@ -19,13 +19,13 @@ public class Piproject implements Serializable {
     /**
      * 
      */
-    @TableId
+//    @TableId
     private String classname;
 
     /**
      * 
      */
-    @TableId
+//    @TableId
     private Long id;
 
     /**

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.text.SimpleDateFormat;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -74,10 +75,16 @@ public class TestMybatisPlusApplicationTests {
 
 
         Date startTime = DateUtils.getStartTime(System.currentTimeMillis());
-        Date endTime = DateUtils.getEndTime(System.currentTimeMillis());
-        String format = DateUtils.format(endTime, "yyyy-MM-dd HH:mm:ss");
+        Date endTime = DateUtils.getEndTime(DateUtils.getDate(System.currentTimeMillis(),0,-3,0,0,0,0));
+        String format1 = DateUtils.format(startTime, "yyyy-MM-dd HH:mm:ss");
+        String format2 = DateUtils.format(endTime, "yyyy-MM-dd HH:mm:ss");
+
+        Long aLong = DateUtils.calculateTimeDifference(endTime.getTime(), startTime.getTime(), ChronoUnit.WEEKS);
         System.out.println(end);
 
+
+
+//        DateUtils.betweenDays(DateUtils.localDateTime())
     }
 
 }
