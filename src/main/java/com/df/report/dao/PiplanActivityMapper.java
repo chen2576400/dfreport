@@ -2,6 +2,7 @@ package com.df.report.dao;
 
 import com.df.report.model.PiplanActivity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.github.yulichang.base.MPJBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -11,7 +12,7 @@ import org.apache.ibatis.annotations.Mapper;
 * @Entity com.df.report.model.PiplanActivity
 */
 @Mapper
-public interface PiplanActivityMapper extends BaseMapper<PiplanActivity> {
+public interface PiplanActivityMapper extends MPJBaseMapper<PiplanActivity> {
 
 }
 

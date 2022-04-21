@@ -6,6 +6,7 @@ import com.df.report.model.PiplanActivityVo;
 import com.df.report.service.PiplanActivityService;
 import com.df.report.dao.PiplanActivityMapper;
 import com.df.util.DateUtils;
+import com.github.yulichang.base.MPJBaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -17,7 +18,7 @@ import java.util.List;
 * @createDate 2022-04-20 16:14:33
 */
 @Service
-public class PiplanActivityServiceImpl extends ServiceImpl<PiplanActivityMapper, PiplanActivity>
+public class PiplanActivityServiceImpl extends MPJBaseServiceImpl<PiplanActivityMapper, PiplanActivity>
     implements PiplanActivityService{
 
 

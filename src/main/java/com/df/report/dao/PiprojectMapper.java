@@ -2,6 +2,7 @@ package com.df.report.dao;
 
 import com.df.report.model.Piproject;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.github.yulichang.base.MPJBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -12,7 +13,7 @@ import org.apache.ibatis.annotations.Mapper;
 */
 
 @Mapper
-public interface PiprojectMapper extends BaseMapper<Piproject> {
+public interface PiprojectMapper extends MPJBaseMapper<Piproject> {
 }
 
 
