@@ -40,16 +40,16 @@ public class TestMybatisPlusApplicationTests {
 
     @Test
     public void testSelect() {
-//        System.out.println(("----- selectAll method test ------"));
-//        List<Dfcvtrial> userList = dfcvtrialMapper.selectList(null);
-//
-//        LambdaQueryWrapper<Dfcvtrial> lqw = Wrappers.lambdaQuery();
-//        lqw.eq(Dfcvtrial::getTrialNature, 4)
-//                .in(Dfcvtrial::getId,123)
-//                .like(Dfcvtrial::getName, "1")
-//                .select(Dfcvtrial::getName);
-//        List<Dfcvtrial> dfcvtrials = dfcvtrialMapper.selectList(lqw);
-//        System.out.println(dfcvtrials);
+        System.out.println(("----- selectAll method test ------"));
+        List<Dfcvtrial> userList = dfcvtrialMapper.selectList(null);
+
+        LambdaQueryWrapper<Dfcvtrial> lqw = Wrappers.lambdaQuery();
+        lqw.eq(Dfcvtrial::getTrialNature, 4)
+                .in(Dfcvtrial::getId,123)
+                .like(Dfcvtrial::getName, "1")
+                .select(Dfcvtrial::getName);
+        List<Dfcvtrial> dfcvtrials = dfcvtrialMapper.selectList(lqw);
+        System.out.println(dfcvtrials);
 //
 //
 //        Dfcvtrial one = dfcvtrialService.getOne(lqw);
@@ -67,14 +67,14 @@ public class TestMybatisPlusApplicationTests {
 
 
 
-        List<Integer> integers = dfcvtrialMapper.selectJoinList(Integer.class, new MPJLambdaWrapper<Dfcvtrial>()
-                .select(PiplanActivity::getId)
-                .leftJoin(PiplanActivity.class, PiplanActivity::getName, Dfcvtrial::getTaskName));
-
-        List<Dfcvtrial> dfcvtrials = dfcvtrialMapper.selectJoinList(Dfcvtrial.class, new MPJLambdaWrapper<>()
-                .in(Dfcvtrial::getId, integers)
-                .select(Dfcvtrial::getContainerRefClass)
-        );
+//        List<Integer> integers = dfcvtrialMapper.selectJoinList(Integer.class, new MPJLambdaWrapper<Dfcvtrial>()
+//                .select(PiplanActivity::getId)
+//                .leftJoin(PiplanActivity.class, PiplanActivity::getName, Dfcvtrial::getTaskName));
+//
+//        List<Dfcvtrial> dfcvtrials = dfcvtrialMapper.selectJoinList(Dfcvtrial.class, new MPJLambdaWrapper<>()
+//                .in(Dfcvtrial::getId, integers)
+//                .select(Dfcvtrial::getContainerRefClass)
+//        );
 
 
         log.info("=============");

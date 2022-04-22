@@ -5,10 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-//@MapperScan(basePackages = "com.df.*.*.dao")
-public class SpringBootLearnApplication {
+public class DFReportApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootLearnApplication.class, args);
+        SpringApplication.run(DFReportApplication.class, args);
     }
 
 }

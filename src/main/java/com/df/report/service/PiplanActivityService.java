@@ -15,6 +15,6 @@ import java.util.List;
  */
 public interface PiplanActivityService extends MPJBaseService<PiplanActivity> {
 
-    public List<PiplanActivityVo> WorkDelayTable(String[] time, String[] group, String projectId, String planId);
+    public List<PiplanActivityVo> WorkDelayTable(String[] time, List<Integer> groupIds, String projectId, String planId);
 
 }
