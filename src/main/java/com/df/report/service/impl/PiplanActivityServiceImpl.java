@@ -7,7 +7,7 @@ import com.df.report.dao.MembershipLinkMapper;
 import com.df.report.dao.PiresourceAssignmentMapper;
 import com.df.report.dao.PiresourceMapper;
 import com.df.report.model.*;
-import com.df.report.service.PiplanActivityService;
+import com.df.report.service.*;
 import com.df.report.dao.PiplanActivityMapper;
 import com.df.util.DateUtils;
 import com.github.yulichang.base.MPJBaseServiceImpl;
@@ -20,11 +20,14 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 
 /**
  * @author chenning
  * @description 针对表【piplan_activity】的数据库操作Service实现
  * @createDate 2022-04-20 16:14:33
+ * <p>
+ * 从集合数据中/和已经有查询条件中
  */
 @Service
 public class PiplanActivityServiceImpl extends MPJBaseServiceImpl<PiplanActivityMapper, PiplanActivity>
@@ -32,11 +35,15 @@ public class PiplanActivityServiceImpl extends MPJBaseServiceImpl<PiplanActivity
     @Autowired
     PiplanActivityMapper piplanActivityMapper;
     @Autowired
-    MembershipLinkMapper membershipLinkMapper;
+    FunctionApply functionApply;
     @Autowired
-    PiresourceMapper piresourceMapper;
+    private MembershipLinkService membershipLinkService;
     @Autowired
-    PiresourceAssignmentMapper piresourceAssignmentMapper;
+    private PigroupService pigroupService;
+    @Autowired
+    private PiresourceService piresourceService;
+    @Autowired
+    private PiresourceAssignmentService piresourceAssignmentService;
 
     @Override
     public List<PiplanActivityVo> WorkDelayTable(String[] time, List<Integer> groupIds, String projectId, String planId) {
@@ -59,12 +66,12 @@ public class PiplanActivityServiceImpl extends MPJBaseServiceImpl<PiplanActivity
                 .eq(Objects.nonNull(projectId), PiplanActivity::getProjectRefId, projectId)
                 .eq(Objects.nonNull(planId), PiplanActivity::getRootRefId, planId)
                 .between(PiplanActivity::getTargetStartDate, startTime, endTime);
-        List<Integer> reoourceIds = getPlannableIds(groupIds);
-        if (CollectionUtils.isNotEmpty(reoourceIds)) {
-            List<List<Integer>> partition = Lists.partition(reoourceIds, 900);
+        List<Integer> planActIds = functionApply.getPlanActIds(membershipLinkService::rolebobjectIds, piresourceService::resourceIds, piresourceAssignmentService::assignmentRsrcIds, groupIds);
+        if (CollectionUtils.isNotEmpty(planActIds)) {
+            List<List<Integer>> partition = Lists.partition(planActIds, 900);
             for (List<Integer> integers : partition) {
                 wrapper1.and(objectMPJLambdaWrapper -> objectMPJLambdaWrapper.or(objectMPJLambdaWrapper1 ->
-                objectMPJLambdaWrapper1.in(PiplanActivity::getId, reoourceIds)));
+                        objectMPJLambdaWrapper1.in(PiplanActivity::getId, planActIds)));
             }
         }
         List<PiplanActivityVo> piplanActivityVos = piplanActivityMapper.selectJoinList(PiplanActivityVo.class, wrapper1);
@@ -72,44 +79,6 @@ public class PiplanActivityServiceImpl extends MPJBaseServiceImpl<PiplanActivity
     }
 
 
-    private List<Integer> getPlannableIds(List<Integer> groupIds) {
-        MPJLambdaWrapper<Object> wrapper2 = new MPJLambdaWrapper<>();
-        wrapper2.select(MembershipLink::getRolebobjectId);
-        wrapper2.leftJoin(Pigroup.class, Pigroup::getId, MembershipLink::getRoleaobjectId);
-        if (CollectionUtils.isNotEmpty(groupIds)) {
-            List<List<Integer>> partition = Lists.partition(groupIds, 900);
-            for (List<Integer> integers : partition) {
-                wrapper2.or(objectMPJLambdaWrapper -> objectMPJLambdaWrapper.in(Pigroup::getId, integers));
-            }
-        }
-        wrapper2.groupBy(MembershipLink::getRolebobjectId);
-        //MembershipLink  RolebobjectId 集合
-        List<Integer> rolebobjectIds = membershipLinkMapper.selectJoinList(Integer.class, wrapper2);
-        if (CollectionUtils.isEmpty(rolebobjectIds)) return null;
-
-
-        MPJLambdaWrapper<Piresource> wrapper3 = new MPJLambdaWrapper();
-        wrapper3.select(Piresource::getId);
-        List<List<Integer>> partition1 = Lists.partition(rolebobjectIds, 900);
-        for (List<Integer> integers : partition1) {
-            wrapper3.or(lambdaQueryWrapper -> lambdaQueryWrapper.in(Piresource::getUserRefId, integers));
-        }
-        //reoourceIds
-        List<Integer> reoourceIds = piresourceMapper.selectJoinList(Integer.class, wrapper3);
-
-
-        MPJLambdaWrapper<Piresource> wrapper4 = new MPJLambdaWrapper();
-        wrapper4.select(PiresourceAssignment::getPlannableRefId);
-        if (CollectionUtils.isNotEmpty(reoourceIds)) {
-            List<List<Integer>> partition = Lists.partition(reoourceIds, 900);
-            for (List<Integer> integers : partition) {
-                wrapper4.or(lambdaQueryWrapper -> lambdaQueryWrapper.in(PiresourceAssignment::getRsrcRefId, integers));
-            }
-        }
-        //piresource_assignment.plannable_id 集
-        List<Integer> assignmentRsrcIds = piresourceAssignmentMapper.selectJoinList(Integer.class, wrapper4);
-        return assignmentRsrcIds;
-    }
 }
 
 
